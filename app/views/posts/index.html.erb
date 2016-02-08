@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<div class="jumbotron">
+  <h1>Listing Posts</h1>
+</div>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Sub</th>
+      <th>Desc</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody class="table-hover">
+    <% @posts.each do |post| %>
+    <tr class= <%= getClassForRow(post.id) %>>
+      <td><%= post.sub %></td>
+      <td>
+        <% if !post.desc.blank? && post.desc.length > 20 %>
+        <%= post.desc[0..20]  + "..." %>
+        <% else %>
+        <%= post.desc %>
+        <% end %>
+      </td>
+      <td><%= link_to 'Show', post, class:"btn btn-success", role:"button" %></td>
+      <td><%= link_to 'Edit', edit_post_path(post), class:"btn btn-warning", role:"button" %></td>
+      <td><%= link_to 'Destroy', post, method: :delete, class:"btn btn-danger", role:"button", data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post', new_post_path, class:"btn btn-info", role:"button" %>
